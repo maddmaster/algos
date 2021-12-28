@@ -7,7 +7,7 @@ class Node:
         self.left = self.right = None
 
     def __str__(self):
-        return "Mode(data: {}, left: {}, right:{})".format(self.data, self.left, self.right)
+        return "Node(data: {}, left: {}, right:{})".format(self.data, self.left, self.right)
 
 
 def build_tree(in_order: List[str], pre_order: List[str], in_start: int, in_end: str, pre_index: int):

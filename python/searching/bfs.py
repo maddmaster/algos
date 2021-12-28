@@ -10,35 +10,42 @@ class Node:
         return "Node(data: {}, left: {}, right:{})".format(self.data, self.left, self.right)
 
 
-def build_tree(in_order: List[str], pre_order: List[str], in_start: int, in_end: str, pre_index: int):
-    if in_start > in_end:
-        return None
-    else:
-        node = Node(pre_order[pre_index])
-        pre_index += 1
+class Solution:
+    def build_tree(self, in_order, pre_order):
 
-        if in_start == in_end:
-            return node
-        else:
-            in_index = search(in_order, in_start, in_end, node.data)
+        if len(in_order) == 0:
+            return None
 
-            node.left = build_tree(in_order, pre_order, in_start, in_index - 1, pre_index)
-            node.right = build_tree(in_order, pre_order, in_index + 1, in_end, pre_index)
+        if len(in_order) == 1:
+            return Node(in_order[0])
 
-        return node
+        data = pre_order[0]
+        root = Node(data)
 
+        index = in_order.index(data)
 
-def search(in_order, start, end, value):
-    for i in range(start, end + 1):
-        if in_order[i] == value:
-            return i
+        left_in_order = in_order[:index]
+        right_in_order = in_order[index + 1:]
+        print("{}, {}, {}".format(left_in_order, root.data, right_in_order))
+
+        left_pre_order = pre_order[1: len(left_in_order) + 1]
+        right_pre_order = pre_order[1 + len(left_pre_order):]
+        print("{}, {}, {}".format(left_pre_order, root.data, right_pre_order))
+
+        root.left = self.build_tree(left_in_order, left_pre_order)
+        root.right = self.build_tree(right_in_order, right_pre_order)
+
+        return root
 
 
 def main():
+    solution = Solution()
+
     in_order = list("DBEAFC")
     pre_order = list("ABDECF")
 
-    root = build_tree(in_order, pre_order, 0, len(in_order) - 1, 0)
+    root = solution.build_tree(in_order, pre_order)
+    print(root)
 
 
 if __name__ == '__main__':

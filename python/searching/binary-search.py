@@ -3,7 +3,7 @@ from typing import List
 
 def binary_search_iterative(items: List[str], search_for: str) -> int:
     start = 0
-    end = len(items) - 1
+    end = len(items)
 
     print(items)
 
@@ -11,7 +11,7 @@ def binary_search_iterative(items: List[str], search_for: str) -> int:
         mid = (start + end) // 2
 
         if search_for == items[mid]:
-            return mid - 1
+            return mid
 
         if search_for > items[mid]:
             start = mid + 1
@@ -25,7 +25,7 @@ def binary_search_iterative(items: List[str], search_for: str) -> int:
 
 def main():
     str = "ABCDEFGHIJ"
-    position = binary_search_iterative(list(str), "J")
+    position = binary_search_iterative(list(str), "H")
     print(position)
 
 

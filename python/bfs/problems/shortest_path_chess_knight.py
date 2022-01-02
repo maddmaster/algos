@@ -1,5 +1,5 @@
 import sys
-from typing import List
+from typing import List, Set
 
 
 class Location:
@@ -49,7 +49,9 @@ def find_shortest_distance(origin: Location, destination: Location, size):
 
 
 def main():
-    print(find_shortest_distance(Location(0, 0), Location(7, 7), 8))
+    # print(find_shortest_distance(Location(0, 0), Location(7, 7), 8))
+    origin = Location(0, 0)
+    destination = Location(0, 0)
 
 
 if __name__ == "__main__":

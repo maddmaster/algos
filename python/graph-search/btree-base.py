@@ -1,4 +1,5 @@
 from typing import List
+from graphviz import Digraph, Source
 
 
 class Node:
@@ -13,6 +14,7 @@ class Node:
 class Solution:
     def build_tree(self, in_order, pre_order):
 
+        # serves as stop conditions during recursion
         if len(in_order) == 0:
             return None
 
@@ -24,18 +26,51 @@ class Solution:
 
         index = in_order.index(data)
 
+        # divide the inorder tree to smaller problems (i.e. left and right subtree)
         left_in_order = in_order[:index]
         right_in_order = in_order[index + 1:]
         print("{}, {}, {}".format(left_in_order, root.data, right_in_order))
 
+        # divide the preorder tree to smaller problems (i.e left and right preorder)
         left_pre_order = pre_order[1: len(left_in_order) + 1]
         right_pre_order = pre_order[1 + len(left_pre_order):]
         print("{}, {}, {}".format(left_pre_order, root.data, right_pre_order))
 
+        # solve the sub problems
         root.left = self.build_tree(left_in_order, left_pre_order)
         root.right = self.build_tree(right_in_order, right_pre_order)
 
         return root
+
+
+def print_tree(node, level=0):
+    if node is not None:
+        print_tree(node.left, level + 1)
+        print(' ' * 4 * level + '->', node.data)
+        print_tree(node.right, level + 1)
+
+
+def visualize_using_graphviz(root: Node):
+    def add_nodes_and_edges(root: Node, dot=None):
+        if dot is None:
+            dot = Digraph()
+            dot.node(name=root.data, label=root.data)
+
+        if root.left:
+            dot.node(name=root.left.data, label=root.left.data)
+            dot.edge(root.data, root.left.data)
+            dot = add_nodes_and_edges(root.left, dot=dot)
+
+        if root.right:
+            dot.node(name=root.right.data, label=root.right.data)
+            dot.edge(root.data, root.right.data)
+            dot = add_nodes_and_edges(root.right, dot=dot)
+
+        return dot
+
+    dot = add_nodes_and_edges(root)
+
+    return dot
 
 
 def main():
@@ -45,7 +80,12 @@ def main():
     pre_order = list("ABDECF")
 
     root = solution.build_tree(in_order, pre_order)
-    print(root)
+    print_tree(root)
+
+    dot = visualize_using_graphviz(root)
+    print(dot)
+    dot.render(view=True)
+
 
 
 if __name__ == '__main__':

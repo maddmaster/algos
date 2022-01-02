@@ -86,6 +86,5 @@ def main():
     dot.render(view=True)
 
 
-
 if __name__ == '__main__':
     main()

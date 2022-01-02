@@ -1,6 +1,7 @@
 import sys
 from typing import List
 
+
 class Location:
     def __init__(self, x, y, distance=0):
         self.x = x
@@ -17,56 +18,38 @@ class Location:
         return hash((self.x, self.y))
 
     def __eq__(self, other):
-        return (self.x, self.y, self.distance) == (other.x, other.y, other.distance)
+        return (self.x, self.y) == (other.x, other.y)
 
     def __str__(self):
-        return "Location(x={}, y={})".format(self.x, self.y, self.distance)
+        return "Location(x={}, y={}, distance={})".format(self.x, self.y, self.distance)
 
 
-possible_moves = [(2, -1), (2, 1), (-2, 1), (-2, -1), (1, 2), (1, -2), (-1, 2), (-1, -2)]
+possible_moves = [(1, 2), (2, 1), (2, -1), (1, -2), (-1, -2), (-2, -1), (-2, 1), (-1, 2)]
 
 
 def find_shortest_distance(origin: Location, destination: Location, size):
     visited = set()
 
     to_visit: List[Location] = [origin]
-
     while to_visit:
-        location = to_visit.pop()
+        at = to_visit.pop(0)
 
-        if location.x == destination.x and location.y == destination.y:
-            return location.distance
+        if at == destination:
+            return at.distance
 
-        if location not in visited:
-            visited.add(location)
+        if at not in visited:
+            visited.add(at)
 
             for move in possible_moves:
-                to = Location(location.x + move[0], location.y + move[1], location.distance + 1)
-                print("to: {}".format(to))
+                to = Location(at.x + move[0], at.y + move[1], at.distance + 1)
                 if to.is_valid(size):
                     to_visit.append(to)
 
     return sys.maxsize
 
+
 def main():
     print(find_shortest_distance(Location(0, 0), Location(7, 7), 8))
-
-    """
-    origin = Location(0, 0)
-    print(origin)
-    destination = Location(1, 2)
-    print(destination)
-    at = Location(1, 2)
-    print(at)
-    print(destination == at)
-    print(destination == origin)
-
-    foo = Location(0, 0, 1)
-    visited = [origin]
-    print(visited)
-    print(foo in visited)
-    """
-
 
 
 if __name__ == "__main__":

@@ -17,6 +17,6 @@ def first_not_smaller(arr: List[int], target: int) -> int:
 if __name__ == '__main__':
     arr = [int(x) for x in "1 3 3 5 8 8 10".split()]
     print(arr)
-    target = 2
+    target = 10
     res = first_not_smaller(arr, target)
     print(res)

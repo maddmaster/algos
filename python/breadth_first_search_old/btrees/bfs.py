@@ -1,5 +1,5 @@
 import base2
-
+from binarytree import Node
 
 # used for shortest path
 def traverse_breadth_first_iterative(root):

@@ -31,7 +31,8 @@ def is_balanced(tree: Node) -> bool:
     left_subtree_height = get_height(tree.left)
     right_subtree_height = get_height(tree.right)
 
-    # if the diff in height for subtrees is <= 1 and left subtree and right subtree are balanced then tree is balanced...
+    # if the diff in height for subtrees is <= 1 and left subtree and right subtree are balanced then tree is
+    # balanced...
     if not is_balanced(tree.left) or not is_balanced(tree.right) or abs(left_subtree_height - right_subtree_height) > 1:
         return False
     else:

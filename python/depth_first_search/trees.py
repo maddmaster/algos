@@ -4,6 +4,9 @@ class Node:
         self.left = left
         self.right = right
 
+    def __str__(self):
+        return "Node(value: {}, left: {}, right: {}".format(self.val, self.left, self.right)
+
 
 def build_tree(nodes, f):
     val = next(nodes)
@@ -11,6 +14,7 @@ def build_tree(nodes, f):
     left = build_tree(nodes, f)
     right = build_tree(nodes, f)
     return Node(f(val), left, right)
+
 
 
 if __name__ == "__main__":

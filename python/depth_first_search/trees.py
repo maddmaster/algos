@@ -16,6 +16,5 @@ def build_tree(nodes, f):
     return Node(f(val), left, right)
 
 
-
 if __name__ == "__main__":
     pass

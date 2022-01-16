@@ -1,7 +1,10 @@
 from typing import List
 
+
 # python is pass by reference
 def merge_sort(array: List[int]):
+    print("input: {}".format(array))
+
     if len(array) > 1:
 
         mid = len(array) // 2
@@ -9,7 +12,6 @@ def merge_sort(array: List[int]):
         left = array[:mid]
         right = array[mid:]
 
-        print("input: {}".format(array))
         print("left: {}".format(left))
         print("right: {}".format(right))
 

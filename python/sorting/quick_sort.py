@@ -1,14 +1,14 @@
-def partition(array, low, high):
-    print(" partition -> {}, low -> {}, right -> {}".format(array, low, high))
+def partition(array, left, right):
+    print(" partition -> {}, left -> {}, right -> {}".format(array, left, right))
     # choose the rightmost element as pivot
-    pivot = array[high]
+    pivot = array[right]
 
     # pointer for greater element
-    i = low - 1
+    i = left - 1
 
     # traverse through all elements
     # compare each element with pivot
-    for j in range(low, high):
+    for j in range(left, right):
         if array[j] <= pivot:
             # if element smaller than pivot is found
             # swap it with the greater element pointed by i
@@ -20,7 +20,7 @@ def partition(array, low, high):
         print("   compare -> {}, j -> {}, i -> {}, pivot -> {}".format(array, j, i, pivot))
 
     # swap the pivot element with the greater element specified by i
-    (array[i + 1], array[high]) = (array[high], array[i + 1])
+    (array[i + 1], array[right]) = (array[right], array[i + 1])
 
     print("   compare -> {}, j -> {}, i -> {}, pivot -> {}".format(array, j, i, pivot))
 
@@ -30,7 +30,7 @@ def partition(array, low, high):
 
 # function to perform quicksort
 def quick_sort(array, left, right):
-    print("quick sort -> {}".format(array))
+    print("quick sort -> {}, left -> {}, right -> {}".format(array, left, right))
     if left < right:
         # find pivot element such that
         # element smaller than pivot are on the left

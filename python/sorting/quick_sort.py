@@ -1,5 +1,5 @@
 def partition(array, left, right):
-    print(" partition -> {}, left -> {}, right -> {}".format(array, left, right))
+    print(" partition -> {}, low -> {}, right -> {}".format(array, left, right))
     # choose the rightmost element as pivot
     pivot = array[right]
 
